@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".feature.main.MainActivity"
+    android:background="@color/backGroundColor">
+    <include
+        android:visibility="gone"
+        android:id="@+id/empty_content"
+        layout="@layout/content_empty" />
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_srl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/scroll_ns"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:padding="@dimen/spacing_medium"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <com.github.ksoichiro.android.observablescrollview.ObservableRecyclerView
+                    tools:listitem="@layout/item_movie"
+                    android:id="@+id/movie_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical" />
+                <include
+                    android:visibility="gone"
+                    android:layout_below="@+id/movie_rv"
+                    android:id="@+id/loading_content"
+                    layout="@layout/item_loading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

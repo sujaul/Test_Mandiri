@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_first">
+
+    <fragment
+        android:id="@+id/nav_first"
+        android:name="com.test.test_karim2.feature.main.first.FirstFragment"
+        android:label="NavFirst"
+        tools:layout="@layout/fragment_first">
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/nav_second" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_second"
+        android:name="com.test.test_karim2.feature.main.second.SecondFragment"
+        android:label="NavSecond"
+        tools:layout="@layout/fragment_second">
+        <argument
+            android:name="genreId"
+            app:argType="integer" />
+        <argument
+            android:name="genreName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_SecondFragment_to_ThirdFragment"
+            app:destination="@id/nav_third" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_third"
+        android:name="com.test.test_karim2.feature.main.third.ThirdFragment"
+        android:label="NavThird"
+        tools:layout="@layout/fragment_third">
+        <argument
+            android:name="movieId"
+            app:argType="integer" />
+        <argument
+            android:name="movieName"
+            app:argType="string" />
+        <argument
+            android:name="youtubePath"
+            app:argType="string" />
+    </fragment>
+
+</navigation>

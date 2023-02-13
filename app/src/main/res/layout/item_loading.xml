@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center"
+    android:padding="@dimen/_7sdp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/loading_ll">
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:theme="@style/ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"/>
+</androidx.appcompat.widget.LinearLayoutCompat>

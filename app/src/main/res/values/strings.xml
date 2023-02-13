@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Test_Karim2</string>
+
+    <string name="error_connection">Connection failed, Please check your internet connection!!!</string>
+    <string name="loading">Please Wait..</string>
+    <string name="no_data">Data Empty</string>
+
+    <!--First Screen-->
+    <string name="search_hint">Search github user</string>
+    <string name="text_footer"><![CDATA[Copyright © 2023 Sujaul_Karim All rights reserved]]></string>
+    <string name="release_date">Release Date</string>
+    <string name="detail">Detail</string>
+    <string name="review">Review</string>
+
+    <!--Second Screen-->
+    <string name="genres">Genres</string>
+    <string name="no_data_to_load">No data to load more</string>
+
+</resources>
