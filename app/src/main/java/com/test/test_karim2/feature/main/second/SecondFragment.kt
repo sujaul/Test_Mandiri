@@ -25,6 +25,7 @@ import com.test.test_karim2.R
 import com.test.test_karim2.data.model.MovieByGenre
 import com.test.test_karim2.data.model.MovieDetail
 import com.test.test_karim2.databinding.FragmentSecondBinding
+import com.test.test_karim2.databinding.ItemMovieDetailBinding
 import com.test.test_karim2.feature.*
 import com.test.test_karim2.feature.main.MainActivity
 import com.test.test_karim2.util.gone
@@ -224,10 +225,8 @@ class SecondFragment : BaseFragment<FragmentSecondBinding>() {
     }
 
     fun showBottomMovieDetail(movieDetail: MovieDetail){
-        val view: View = layoutInflater.inflate(R.layout.item_movie_detail, null)
-        val tvTittle = view.findViewById<TextView>(R.id.title_tv)
-        tvTittle.text = movieDetail.title
-        val posterIv = view.findViewById<ImageView>(R.id.poster_iv)
+        val alertBinding = ItemMovieDetailBinding.inflate(LayoutInflater.from(mContext))
+        alertBinding.titleTv.text = movieDetail.title
         val options: RequestOptions = RequestOptions()
             .placeholder(R.drawable.ic_baseline_groups_24)
             .error(R.drawable.ic_baseline_groups_24)
@@ -236,10 +235,8 @@ class SecondFragment : BaseFragment<FragmentSecondBinding>() {
         Glide.with(mContext)
             .load("$basePathImmage${movieDetail.poster_path}")
             .apply(options)
-            .into(posterIv)
-        val tvDescription = view.findViewById<TextView>(R.id.description_tv)
-        tvDescription.text = movieDetail.overview
-        val tvOtherDesc = view.findViewById<TextView>(R.id.other_desc_tv)
+            .into(alertBinding.posterIv)
+        alertBinding.descriptionTv.text = movieDetail.overview
         var genre = ""
         movieDetail.genres.forEachIndexed { index, it ->
             if (index != 0) genre += ", "
@@ -276,11 +273,11 @@ class SecondFragment : BaseFragment<FragmentSecondBinding>() {
         text.append("<b><font color=#000000>Tagline</font><br></b><font color=#757575>${movieDetail.tagline}</font><br>")
         text.append("<b><font color=#000000>Vote Average</font><br></b><font color=#757575>${movieDetail.vote_average}</font><br>")
         text.append("<b><font color=#000000>Vote Count</font><br></b><font color=#757575>${movieDetail.vote_count}</font><br>")
-        tvOtherDesc.text = HtmlCompat.fromHtml(text.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
+        alertBinding.otherDescTv.text = HtmlCompat.fromHtml(text.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
         val dialog = BottomSheetDialog(mContext)
-        dialog.setContentView(view)
+        dialog.setContentView(alertBinding.root)
         dialog.setCancelable(true)
-        (view.parent as View).setBackgroundColor(ContextCompat.getColor(mContext, R.color.transparent))
+        (alertBinding.root.parent as View).setBackgroundColor(ContextCompat.getColor(mContext, R.color.transparent))
         dialog.show()
     }
 
