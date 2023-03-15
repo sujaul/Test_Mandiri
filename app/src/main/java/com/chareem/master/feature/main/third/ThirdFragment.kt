@@ -51,7 +51,13 @@ class ThirdFragment : BaseFragment<FragmentThirdBinding>() {
     }
 
     override fun getTagName(): String = TAG
-    override fun onCreateUI(view: View, savedInstanceState: Bundle?) {
+    override fun onCreateUI() {
+        observVm()
+        vmThird.getMovieReview(args.movieId, page, mContext)
+        lifecycle.addObserver(binding.videoYtp)
+    }
+
+    override fun onUiCreated(view: View, savedInstanceState: Bundle?) {
         init()
     }
 
@@ -79,11 +85,7 @@ class ThirdFragment : BaseFragment<FragmentThirdBinding>() {
                 }
             }
         })
-        if (movieReviewAdapter.itemCount == 0) {
-            observVm()
-            vmThird.getMovieReview(args.movieId, page, mContext)
-            lifecycle.addObserver(binding.videoYtp)
-        }
+
         binding.videoYtp.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
                 val videoId = args.youtubePath

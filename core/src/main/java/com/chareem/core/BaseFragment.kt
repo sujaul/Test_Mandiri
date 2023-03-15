@@ -48,7 +48,8 @@ abstract class BaseFragment<VB: ViewBinding> : Fragment(), BaseImplDialog, BaseI
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Boolean): VB
 
-    abstract fun onCreateUI(view: View, savedInstanceState: Bundle?)
+    abstract fun onCreateUI()
+    abstract fun onUiCreated(view: View, savedInstanceState: Bundle?)
 
     private var pDialog: Dialog? = null
     private var snackbar : Snackbar? = null
@@ -84,14 +85,19 @@ abstract class BaseFragment<VB: ViewBinding> : Fragment(), BaseImplDialog, BaseI
     ): View? {
         Timber.i("${getTagName()} onCreateView() called")
         _binding = setBinding(inflater, container, false)
+        if (viewCount == 1){
+            onCreateUI()
+            viewCount ++
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hideSoftKeyboard()
+        Log.d("kkkkkkkk", "2")
         Timber.i("${getTagName()} onViewCreated() called")
-        onCreateUI(view, savedInstanceState)
+        onUiCreated(view, savedInstanceState)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

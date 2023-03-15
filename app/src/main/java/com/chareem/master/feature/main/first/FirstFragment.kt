@@ -35,7 +35,12 @@ class FirstFragment : BaseFragment<FragmentFirstBinding>() {
     }
 
     override fun getTagName(): String = TAG
-    override fun onCreateUI(view: View, savedInstanceState: Bundle?) {
+    override fun onCreateUI() {
+        observVm()
+        vmFirst.getMovieGenre()
+    }
+
+    override fun onUiCreated(view: View, savedInstanceState: Bundle?) {
         init()
     }
 
@@ -43,10 +48,6 @@ class FirstFragment : BaseFragment<FragmentFirstBinding>() {
         setupRecycler()
         binding.genreSrl.setOnRefreshListener {
             vmFirst.getMovieGenreServer(mContext)
-        }
-        if (genreGroupAdapter.itemCount == 0) {
-            observVm()
-            vmFirst.getMovieGenre()
         }
     }
 

@@ -58,13 +58,18 @@ class SecondFragment : BaseFragment<FragmentSecondBinding>() {
     }
 
     override fun getTagName(): String = TAG
-    override fun onCreateUI(view: View, savedInstanceState: Bundle?) {
+
+    override fun onCreateUI() {
+        observVm()
+        vmSecond.getMovieByGenre(args.genreId, page, mContext)
+    }
+
+    override fun onUiCreated(view: View, savedInstanceState: Bundle?) {
         init()
     }
 
     private fun init(){
         setupRecycler()
-
         binding.refreshSrl.setOnRefreshListener {
             if (!isLoadMore && !isRefreshing){
                 isRefreshing = true
@@ -87,11 +92,6 @@ class SecondFragment : BaseFragment<FragmentSecondBinding>() {
                 }
             }
         })
-
-        if (movieByGenreAdapter.itemCount == 0) {
-            observVm()
-            vmSecond.getMovieByGenre(args.genreId, page, mContext)
-        }
     }
 
     private fun setupRecycler(){
