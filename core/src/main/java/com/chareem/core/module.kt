@@ -60,10 +60,10 @@ val coreModule = module {
             writeTimeout(REQUEST_TIMEOUT.toLong(), TimeUnit.SECONDS)
             addInterceptor(ConnectivityInterceptorImpl(get()))
             addNetworkInterceptor(StethoInterceptor())
-            certificatePinner(CertificatePinner.Builder()
+            /*certificatePinner(CertificatePinner.Builder()
                     .add(Constant.BASE_URL, "sha1/mBN/TTGneHe2Hq0yFG+SRt5nMZQ=")
                     .add(Constant.BASE_URL, "sha1/6CgvsAgBlX3PYiYRGedC0NZw7ys=")
-                    .build())
+                    .build())*/
             apply {
                 val trustAllCerts = arrayOf<TrustManager>(object : X509TrustManager {
                     @SuppressLint("TrustAllX509TrustManager")

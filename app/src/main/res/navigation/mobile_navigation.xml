@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_first"
-        android:name="com.test.test_karim2.feature.main.first.FirstFragment"
+        android:name="com.chareem.master.feature.main.first.FirstFragment"
         android:label="NavFirst"
         tools:layout="@layout/fragment_first">
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/nav_second"
-        android:name="com.test.test_karim2.feature.main.second.SecondFragment"
+        android:name="com.chareem.master.feature.main.second.SecondFragment"
         android:label="NavSecond"
         tools:layout="@layout/fragment_second">
         <argument
@@ -33,7 +33,7 @@
 
     <fragment
         android:id="@+id/nav_third"
-        android:name="com.test.test_karim2.feature.main.third.ThirdFragment"
+        android:name="com.chareem.master.feature.main.third.ThirdFragment"
         android:label="NavThird"
         tools:layout="@layout/fragment_third">
         <argument

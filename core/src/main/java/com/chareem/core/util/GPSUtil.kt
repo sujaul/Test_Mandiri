@@ -17,7 +17,7 @@ import timber.log.Timber
 class GpsUtils(private val context: Context) {
 
     private val settingsClient: SettingsClient = LocationServices.getSettingsClient(context)
-    private val locationSettingsRequest: LocationSettingsRequest?
+    private val locationSettingsRequest: LocationSettingsRequest
     private val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
     init {

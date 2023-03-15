@@ -7,14 +7,13 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
+import android.view.View
 import com.chareem.core.R
-import com.chareem.core.util.getString
-import com.chareem.core.util.gone
-import com.chareem.core.util.visible
-import kotlinx.android.synthetic.main.error_view.view.*
+import com.chareem.core.databinding.ErrorViewBinding
 
 class ErrorView : RelativeLayout {
     private var errorListener: ErrorListener? = null
+    private var binding: ErrorViewBinding? = null
 
     constructor(context: Context) : super(context) {
         init()
@@ -28,55 +27,36 @@ class ErrorView : RelativeLayout {
         init()
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {
         init()
     }
 
     private fun init() {
         gravity = Gravity.CENTER
-        LayoutInflater.from(context).inflate(R.layout.error_view, this)
+        binding = ErrorViewBinding.inflate(LayoutInflater.from(context))
     }
 
-    fun setView(isError: Boolean, message: String?, case:Int? = 0, listener:ErrorListener) {
-        lyt_disconnect.visible()
-        if (isError) {
-            txt_connection.text = message
-            img_error.visible()
-            lyt_offline.visible()
-            when(case){
-                0 -> {
-                    if (message.isNullOrBlank()) txt_connection.text = getString(R.string.base_error_permission)
-                    img_error.setImageResource(R.drawable.ic_block)
+    fun setView(isError: Boolean, message: String?, case:Int? = 0, listener: ErrorListener) {
+        binding?.let {
+            it.lytDisconnect.visibility = View.VISIBLE
+            if (isError) {
+                it.lytOffline.visibility = View.VISIBLE
+                if (case == 2) it.imgError.setImageResource(R.drawable.ic_signal_wifi_off)
+                else if (case == 1) it.imgError.setImageResource(R.drawable.ic_gps_off)
+                else it.imgError.setImageResource(R.drawable.ic_bug_report)
+                if (message != null) it.txtConnection.text = message
+                it.lytOffline.setOnClickListener {
+                    listener.onReloadData()
                 }
-                1 -> {
-                    if (message.isNullOrBlank()) txt_connection.text = getString(R.string.base_error_no_gps)
-                    img_error.setImageResource(R.drawable.ic_gps_off)
-                }
-                2 -> {
-                    if (message.isNullOrBlank()) txt_connection.text = getString(R.string.base_error_connection)
-                    img_error.setImageResource(R.drawable.ic_signal_wifi_off)
-                }
-                3 -> {
-                    if (message.isNullOrBlank()) txt_connection.text = getString(R.string.base_error_unknown)
-                    img_error.setImageResource(R.drawable.ic_bug_report)
-                }
-                4 -> {
-                    if (message.isNullOrBlank()) txt_connection.text = getString(R.string.base_error_no_data)
-                    img_error.gone()
-                }
-                else -> {
-                    if (message.isNullOrBlank()) txt_connection.text = getString(R.string.base_error_unknown)
-                    img_error.gone()
-                }
+            } else {
+                it.lytDisconnect.visibility = View.GONE
+                it.lytOffline.visibility = View.GONE
             }
-            lyt_offline.setOnClickListener {
-                listener.onReloadData()
-            }
-        } else {
-            lyt_disconnect.gone()
-            lyt_offline.gone()
         }
+    }
+
+    fun setErrorListener(errorListener: ErrorListener) {
+        this.errorListener = errorListener
     }
 
     interface ErrorListener {

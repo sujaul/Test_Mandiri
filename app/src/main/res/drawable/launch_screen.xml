@@ -9,16 +9,23 @@
 
     <!-- Your product logo - 144dp color version of your app icon -->
 
-    <item>
+    <!--<item>
         <shape android:shape="oval"  >
             <solid android:angle="-90"
                 android:color="@color/overlay_light_30"  />
+        </shape>
+    </item>-->
+    <item
+        android:gravity="center">
+        <shape android:shape="oval">
+            <solid android:color="@color/overlay_light_30"/>
+            <size android:width="@dimen/_120sdp" android:height="@dimen/_120sdp"/>
         </shape>
     </item>
     <item>
         <bitmap
             android:gravity="center"
             android:tileMode="disabled"
-            android:src="@drawable/user_big" />
+            android:src="@drawable/ic_user" />
     </item>
 </layer-list>

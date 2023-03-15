@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <layer-list>
+            <item>
+                <shape android:shape="oval">
+                    <solid android:color="@color/overlay_light_30"/>
+                    <size android:width="10dp" android:height="10dp"/>
+                    <padding android:bottom="50dp" android:top="50dp"
+                        android:left="50dp" android:right="50dp"/>
+                </shape>
+            </item>
+            <item>
+                <bitmap android:src="@drawable/user_big"/>
+            </item>
+        </layer-list>
+    </item>
+</selector>
